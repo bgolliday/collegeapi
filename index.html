@@ -1,0 +1,45 @@
+
+
+ <form action="" method="get">               
+         <input id="search" type="text" placeholder="Search term">
+         <input type="checkbox" id="Room" > Room&Board 
+         <input type="submit" class="button" onclick='go()'>
+         <!--input type="" class="button" onclick='go()'-->
+
+         
+   </form>
+
+<script src='colleges.js' /> </script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js' /> </script>
+<script>
+    function go()
+    {
+        var name = document.getElementById('search').value;
+        var room = document.getElementById("Room");
+        var result = _.find(Schools.colleges, {'College': name});
+        
+
+        if (name == "") { 
+          window.alert("Error: College name is required"); 
+          console.log("Error: College name is required");
+           }
+        if (room.checked == true && !result) {
+            
+            window.alert('Error: College not found');
+            console.log('Error: College not found'); }
+        else if (room.checked == true && result) {
+            var total =  (+result.Tuition_in_state) + (+result.Room_Board);
+            window.alert('$' + total); 
+            console.log(result.College +' ' + '$' + total); }
+
+        else if (room.checked == false && !result) {
+            
+            window.alert('Error: College not found');
+            console.log('Error: College not found'); }
+        else if (room.checked == false && result)  {
+            
+            window.alert('$' + result.Tuition_in_state);
+            console.log(result.College +' ' +'$' + result.Tuition_in_state); }
+        
+    }
+</script>
